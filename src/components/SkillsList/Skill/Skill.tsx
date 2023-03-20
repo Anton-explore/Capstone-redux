@@ -14,7 +14,7 @@ const Skill = ({ skill }: { skill: SkillsState }) => {
   const handleDelete = () => dispatch(deleteSkill(skill.id));
 
   return (
-    <StyledWrapper key={skill.id}>
+    <StyledWrapper>
           <StyledSkillLane wt={`${skill.skillRange}%`}>
                 {skill.skillName}
             </StyledSkillLane>

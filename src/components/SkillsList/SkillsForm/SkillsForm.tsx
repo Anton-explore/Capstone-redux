@@ -7,7 +7,7 @@ import {
 } from './../SkillsList.styles'
 
 import React from 'react';
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { addSkill } from '../../../features/skills/skillsSlice';
 
 import {
@@ -48,9 +48,11 @@ const SkillsForm: React.FC<{}> = () => {
         } else if (!regEx.test(values.skillName)) {
             errors.firstName = 'Must be only letters or numbers!'
         }
-        const isInclude = skills.some(skill => skill.skillName === values.skillName);
-        if (isInclude) {
-            errors.skillName = 'This skill is already in your list';
+        if (skills.length > 0) {
+            const isInclude = skills.some(skill => skill.skillName === values.skillName);
+            if (isInclude) {
+                errors.skillName = 'This skill is already in your list';
+            }
         }
 
         if (!values.skillRange) {
@@ -79,7 +81,7 @@ const SkillsForm: React.FC<{}> = () => {
             validate={validate}
             
             onSubmit={(values, actions) => {
-                dispatch(addSkill({ id: nanoid(), ...values }));
+            dispatch(addSkill({ id: nanoid(), ...values }));
             //   addSkills(values);
             //   console.log(skillsArr);
               // alert(JSON.stringify(values, null, 4));

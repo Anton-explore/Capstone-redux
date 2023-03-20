@@ -4,7 +4,7 @@ import { createServer, Model } from "miragejs"
 const server = () => createServer({
 
   models: {
-    skill: Model,
+    skill: Model
   },
 
 
@@ -12,19 +12,20 @@ const server = () => createServer({
     this.namespace = "api"
 
 
-    this.post("/skills", (schema, request) => {
-      let attrs = JSON.parse(request.requestBody).skill
-      return schema.skills.create(attrs)
-    })
-        
     this.get("/skills", (schema, request) => {
       return schema.skills.all()
     }, { timing: 3000 }
     )
 
+
+    this.post("/skills", (schema, request) => {
+      let attrs = JSON.parse(request.requestBody)
+      return schema.skills.create(attrs)
+    })
+        
+
     this.delete("/skills/:id", (schema, request) => {
       let id = request.params.id
-
       return schema.skills.find(id).destroy()
     })
 

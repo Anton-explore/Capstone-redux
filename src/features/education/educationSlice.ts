@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit';
 
 import axios from "axios";
 import { TimelineProps } from "../../components/TimeLine";
 
 type DataType = {
-    educations: TimelineProps[];
+  educations: TimelineProps[];
 }
 interface StateType {
     educations: TimelineProps[];
@@ -28,8 +27,8 @@ export const getEducation = createAsyncThunk<
     //   const state = thunkAPI.getState();
       try {
         const { data } = await axios.get('/educations');
-          console.log(`This is my data`);
-          console.log(data.educations);
+          // console.log(`This is my data`);
+          // console.log(data.educations);
         return data as DataType;
       } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
@@ -66,10 +65,9 @@ const educationSlice = createSlice({
     })
       .addCase(getEducation.fulfilled, (state, action) => {
         state.educations = action.payload.educations;
-        console.log(state.educations);
         state.isLoading = false;
     })
-      .addCase(getEducation.rejected, (state, action) => {
+      .addCase(getEducation.rejected, (state, action: any) => {
         state.isLoading = false;
         console.log(action.payload);
         state.error = action.payload.error;

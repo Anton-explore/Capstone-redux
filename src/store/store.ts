@@ -16,8 +16,8 @@ import { useDispatch } from "react-redux";
 
 
 const skillsPersistConfig = {
-    key: 'skills',
-    storage
+  key: 'skills',
+  storage
 };
 
 const educationPersistConfig = {
@@ -45,6 +45,7 @@ export const store = configureStore({
       },
   }),
 });
+
 
 export type RootState = ReturnType<typeof store.getState>;
 

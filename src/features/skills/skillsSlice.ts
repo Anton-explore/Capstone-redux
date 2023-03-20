@@ -31,8 +31,8 @@ export const getSkill = createAsyncThunk<
     //   const state = thunkAPI.getState();
       try {
         const { data } = await axios.get('/skills');
-          console.log(`This is my data`);
-          console.log(data.skills);
+          // console.log(`This is my data`);
+          // console.log(data);
         return data as DataType;
       } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
@@ -66,7 +66,7 @@ export const deleteSkill = createAsyncThunk<
   async (skillId, { rejectWithValue }) => {
     try {
       const {data} = await axios.delete(`/skills/${skillId}`);
-
+      console.log(`delete: ${data}`);
       return data;
     } catch (error:any) {
       return rejectWithValue(error.message);
@@ -100,14 +100,14 @@ const skillSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getSkill.fulfilled, (state, action) => {
+      .addCase(getSkill.fulfilled, (state, action: any) => {
         state.skills = action.payload.skills;
         console.log(state.skills);
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(getSkill.rejected, (state, action: any) => {
         state.isLoading = false;
-        console.log(action.payload);
         state.error = action.payload;
       })
     
@@ -115,10 +115,10 @@ const skillSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(addSkill.fulfilled, (state, action) => {
-        state.skills = [...state.skills, action.payload];
-        console.log(state.skills);
+      .addCase(addSkill.fulfilled, (state, action: any) => {
+        state.skills = [...state.skills, action.payload.skill];
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(addSkill.rejected, (state, action: any) => {
         state.isLoading = false;
@@ -129,9 +129,11 @@ const skillSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteSkill.fulfilled, (state, {payload}) => {
+      .addCase(deleteSkill.fulfilled, (state, { payload }: any) => {
         state.skills = state.skills.filter(skill => skill.id !== payload.id);
+        console.log(state.skills);
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(deleteSkill.rejected, (state, action: any) => {
         state.isLoading = false;
