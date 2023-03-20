@@ -41,7 +41,11 @@ export const getSkill = createAsyncThunk<
   );
 
 
-export const addSkill = createAsyncThunk(
+export const addSkill = createAsyncThunk<
+  DataType,
+  SkillsState
+    // { rejectValue: FetchError }
+  >(
   'skills/addSkill',
   async (formData, { rejectWithValue }) => {
     try {
@@ -53,7 +57,11 @@ export const addSkill = createAsyncThunk(
   }
 );
 
-export const deleteSkill = createAsyncThunk(
+export const deleteSkill = createAsyncThunk<
+  DataType,
+  string
+    // { rejectValue: FetchError }
+  >(
   'skills/deleteSkill',
   async (skillId, { rejectWithValue }) => {
     try {
