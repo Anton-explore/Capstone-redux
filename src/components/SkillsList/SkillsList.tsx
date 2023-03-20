@@ -6,10 +6,10 @@ import {
   StyledSkillLevel
 } from './SkillsList.styles'
 
-import  { forwardRef, useState } from 'react';
+import  { forwardRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { SkillsState } from '../../features/skills/skillsSlice';
+import { RootState, useAppDispatch } from '../../store/store';
+import { getSkill, SkillsState } from '../../features/skills/skillsSlice';
 
 import SkillsForm from './SkillsForm';
 import Skill from './Skill/Skill';
@@ -29,7 +29,15 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const dispatch = useAppDispatch();
   const skills: SkillsState[] = useSelector((state: RootState) => state.skills.skills);
+  const status = useSelector((state: RootState) => state.skills.isLoading);
+  const error = useSelector((state: RootState) => state.skills.error);
+
+  useEffect(() => {
+      dispatch(getSkill());
+  }, [dispatch])
+
 
   return (
     <section ref={forwardedRef} id={id}>
@@ -44,11 +52,16 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
 
       {isOpen && (<SkillsForm />)}
       
-      <StyledResult>
-        {skills.map((skill) =>
-          <Skill key={skill.id} skill={skill}/>
-        )}
-      </StyledResult>
+      {status && <p>Loading...</p>}
+      {error !== null && (
+          <p>Oops, some error occured... {error}</p>
+      )}
+      {skills.length > 0 && (
+        <StyledResult>
+          {skills.map((skill) =>
+            <Skill key={skill.id} skill={skill} />
+          )}
+        </StyledResult>)}
 
       <StyledScaleWrapper>
         <StyledBlock></StyledBlock>
