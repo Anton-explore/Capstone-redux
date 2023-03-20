@@ -1,14 +1,15 @@
-import { useDispatch } from "react-redux";
 import { MdClose } from "react-icons/md";
 
 import { deleteSkill, SkillsState } from "../../../features/skills/skillsSlice";
 import { StyledDelButton, StyledSkillLane, StyledWrapper } from "./Skill.styles";
 
+import { useAppDispatch } from "../../../store/store";
+
 
 
 const Skill = ({ skill }: { skill: SkillsState }) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDelete = () => dispatch(deleteSkill(skill.id));
 

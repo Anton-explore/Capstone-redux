@@ -40,6 +40,34 @@ export const getSkill = createAsyncThunk<
     }
   );
 
+
+export const addSkill = createAsyncThunk(
+  'skills/addSkill',
+  async (formData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/skills`, formData);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteSkill = createAsyncThunk(
+  'skills/deleteSkill',
+  async (skillId, { rejectWithValue }) => {
+    try {
+      const {data} = await axios.delete(`/skills/${skillId}`);
+
+      return data;
+    } catch (error:any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+
 const initialState: StateType = {
     skills: [],
     isLoading: false,
@@ -51,32 +79,60 @@ const skillSlice = createSlice({
   name:"skills",
   initialState,
   reducers: {
-    addSkill: (state, { payload }) => {
-        state.skills = [payload, ...state.skills];
-    },
-    deleteSkill(state, { payload }) {
-        state.skills = state.skills.filter(skill => skill.id !== payload);
-    },
+    // addSkill: (state, { payload }) => {
+    //     state.skills = [payload, ...state.skills];
+    // },
+    // deleteSkill(state, { payload }) {
+    //     state.skills = state.skills.filter(skill => skill.id !== payload);
+    // },
   },
   extraReducers: builder => {
     builder
       .addCase(getSkill.pending, (state) => {
         state.isLoading = true;
-    })
+        state.error = null;
+      })
       .addCase(getSkill.fulfilled, (state, action) => {
         state.skills = action.payload.skills;
         console.log(state.skills);
         state.isLoading = false;
-    })
+      })
       .addCase(getSkill.rejected, (state, action: any) => {
         state.isLoading = false;
         console.log(action.payload);
-        state.error = action.payload.error;
-    })
+        state.error = action.payload;
+      })
+    
+      .addCase(addSkill.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addSkill.fulfilled, (state, action) => {
+        state.skills = [...state.skills, action.payload];
+        console.log(state.skills);
+        state.isLoading = false;
+      })
+      .addCase(addSkill.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+    
+    .addCase(deleteSkill.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteSkill.fulfilled, (state, {payload}) => {
+        state.skills = state.skills.filter(skill => skill.id !== payload.id);
+        state.isLoading = false;
+      })
+      .addCase(deleteSkill.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
   },
 });
 
-export const { addSkill, deleteSkill } = skillSlice.actions;
+// export const { addSkill, deleteSkill } = skillSlice.actions;
 export const skillsReducer = skillSlice.reducer;
 
 

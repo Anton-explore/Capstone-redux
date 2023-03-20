@@ -17,7 +17,7 @@ import {
 
 import { nanoid } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState, useAppDispatch } from '../../../store/store';
 
 import Button from '../../Button';
 
@@ -37,7 +37,7 @@ export interface MyFormValues extends Record<string, {}> {
 const SkillsForm: React.FC<{}> = () => {
 
     const skills: MyFormValues[] = useSelector((state: RootState) => state.skills.skills);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const validate = (values: MyFormValues ) => {
         const errors: FormikErrors<MyFormValues> = {};

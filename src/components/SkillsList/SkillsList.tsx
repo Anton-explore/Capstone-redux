@@ -35,7 +35,7 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
   const error = useSelector((state: RootState) => state.skills.error);
 
   useEffect(() => {
-      dispatch(getSkill());
+    dispatch(getSkill());
   }, [dispatch])
 
 

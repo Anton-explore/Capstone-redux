@@ -23,7 +23,6 @@ const skillsPersistConfig = {
 const educationPersistConfig = {
   key: 'education',
   storage,
-  whitelist: [],
 };
 
 // const persistConfig = {
