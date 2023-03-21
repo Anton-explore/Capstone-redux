@@ -25,7 +25,7 @@ const server = () => createServer({
         
 
     this.delete("/skills/:id", (schema, request) => {
-      let id = request.params.id
+      let id = request.params.id;
       return schema.skills.find(id).destroy()
     })
 

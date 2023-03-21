@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import axios from "axios";
-// import type { PayloadAction } from '@reduxjs/toolkit';
+
 import { MyFormValues } from "../../components/SkillsList/SkillsForm";
 
 export interface SkillsState extends MyFormValues {
@@ -58,16 +57,18 @@ export const addSkill = createAsyncThunk<
 );
 
 export const deleteSkill = createAsyncThunk<
-  DataType,
-  string
+  any,
+  any
     // { rejectValue: FetchError }
   >(
   'skills/deleteSkill',
   async (skillId, { rejectWithValue }) => {
     try {
-      const {data} = await axios.delete(`/skills/${skillId}`);
-      console.log(`delete: ${data}`);
-      return data;
+      const { status, statusText } = await axios.delete(`/skills/${skillId}`);
+      if (status !== 204) {
+        return new Error(`${status} : ${statusText}`);
+      }
+      return skillId;
     } catch (error:any) {
       return rejectWithValue(error.message);
     }
@@ -87,12 +88,6 @@ const skillSlice = createSlice({
   name:"skills",
   initialState,
   reducers: {
-    // addSkill: (state, { payload }) => {
-    //     state.skills = [payload, ...state.skills];
-    // },
-    // deleteSkill(state, { payload }) {
-    //     state.skills = state.skills.filter(skill => skill.id !== payload);
-    // },
   },
   extraReducers: builder => {
     builder
@@ -130,7 +125,7 @@ const skillSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteSkill.fulfilled, (state, { payload }: any) => {
-        state.skills = state.skills.filter(skill => skill.id !== payload.id);
+        state.skills = state.skills.filter(skill => skill.id !== payload);
         console.log(state.skills);
         state.isLoading = false;
         state.error = null;

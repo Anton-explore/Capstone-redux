@@ -34,12 +34,9 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
   const status = useSelector((state: RootState) => state.skills.isLoading);
   const error = useSelector((state: RootState) => state.skills.error);
 
-  // const skillsList = skills.map(skill => skill.skill)
-  // console.log(skillsList);
   useEffect(() => {
     dispatch(getSkill());
   }, [dispatch])
-
 
   return (
     <section ref={forwardedRef} id={id}>
@@ -58,7 +55,7 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
       {error !== null && (
           <p>Oops, some error occured... {error}</p>
       )}
-      {(skillsList.length > 0 && error === null) && (
+      {(skillsList.length > 0 && error === null && !status) && (
         <StyledResult>
           {skillsList.map((skill ) =>
             <Skill key={skill.id} skill={skill} />
