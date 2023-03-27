@@ -1,15 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
-import { TimelineProps } from "../../components/TimeLine";
+import { EduStateType, TimelineProps } from "../../services/types";
+
 
 type DataType = {
   educations: TimelineProps[];
-}
-interface StateType {
-    educations: TimelineProps[];
-    isLoading: boolean,
-    error: string | null,
 }
 
 // type FetchError = {
@@ -24,11 +20,8 @@ export const getEducation = createAsyncThunk<
     >(
     'education/getEducation',
     async (_, thunkAPI) => {
-    //   const state = thunkAPI.getState();
       try {
         const { data } = await axios.get('/educations');
-          // console.log(`This is my data`);
-          // console.log(data.educations);
         return data as DataType;
       } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
@@ -36,7 +29,7 @@ export const getEducation = createAsyncThunk<
     }
   );
 
-const initialState: StateType = {
+const initialState: EduStateType = {
     educations: [],
     isLoading: false,
     error: null,
@@ -76,5 +69,3 @@ const educationSlice = createSlice({
 });
 
 export const educationReducer = educationSlice.reducer;
-
-// export const selectEducation = (state: StateType) => state.educations;

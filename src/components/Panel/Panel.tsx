@@ -10,7 +10,7 @@ import Navigation from "../Navigation";
 import Button from "../Button";
 
 import { MenuContainer, StyledPanel, Toggle } from "./Panel.styles";
-import { nameProps } from "../../services/props";
+import { BUTTONS_TEXT, nameProps } from "../../services/props";
 
 const Panel = () => {
 
@@ -38,7 +38,7 @@ const Panel = () => {
                 <NavLink to="/">
                     <Button
                         shrunk
-                        text="Go back"
+                        text={BUTTONS_TEXT.BACK}
                         icon={<FontAwesomeIcon icon={faChevronLeft} />}
                         onClick={onClickBackHandler}
                     />

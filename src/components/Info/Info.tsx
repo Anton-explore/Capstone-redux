@@ -1,14 +1,11 @@
-import { StyledWrapper } from "./Info.styles";
+import { InfoProps } from "../../services/types";
+import { StyledInfoWrapper } from "./Info.styles";
 
-
-type InfoProps = {
-    text: string;
-}
 
 const Info = (props: InfoProps) => {
 
     return (
-        <StyledWrapper>{ props.text }</StyledWrapper>
+        <StyledInfoWrapper>{ props.text }</StyledInfoWrapper>
     )
 }
 

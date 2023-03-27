@@ -1,14 +1,9 @@
 import { forwardRef } from "react";
+import { BoxProps } from "../../services/types";
 import Heading from "./Heading";
 
-interface BoxProps {
-    title: string,
-    content: string,
-    color?: string,
-    id?: string
-};
 
-export type Ref = HTMLDivElement;
+type Ref = HTMLDivElement;
 
 const Box = forwardRef<Ref, BoxProps>(( {title, content, color, id}: BoxProps, forwardedRef ) =>
 (

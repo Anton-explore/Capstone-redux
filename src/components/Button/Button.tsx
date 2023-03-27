@@ -1,13 +1,5 @@
-import { StyledButton, StyledDiv } from "./Button.styles";
-
-interface ButtonProps {
-    text?: string,
-    icon?: string | JSX.Element,
-    onClick?: () => void;
-    disabled?: boolean;
-    shrunk?: boolean;
-    up?: boolean;
-}
+import { ButtonProps } from "../../services/types";
+import { StyledButton, StyledHeading } from "./Button.styles";
 
 
 const Button: React.FC<ButtonProps> = ( { text, icon, onClick, disabled, shrunk, up } ) => {
@@ -17,11 +9,11 @@ const Button: React.FC<ButtonProps> = ( { text, icon, onClick, disabled, shrunk,
             <StyledButton
                 type="submit"
                 onClick={onClick}
-                disabled={disabled}
+                disabled={!!disabled}
                 up={!!up}
             >
                 {icon}
-                {text ? <StyledDiv shrunk={!!shrunk}>{text}</StyledDiv> : null}
+                {text ? <StyledHeading shrunk={!!shrunk}>{text}</StyledHeading> : null}
                 
             </StyledButton>
         </>

@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const StyledPortfolio = styled.div`
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
 
     .portfolio-filters {
         display: flex;
@@ -35,6 +33,7 @@ export const StyledPortfolio = styled.div`
         width: 100%;
         min-width: 100px;
         overflow: hidden;
+        cursor: pointer;
     }
 
     .portfolio-img {

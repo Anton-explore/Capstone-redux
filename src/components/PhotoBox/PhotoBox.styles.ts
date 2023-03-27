@@ -68,7 +68,4 @@ export const StyledImgDiv = styled.div<{ isInline: boolean, facade: boolean }>`
             height: 200px;
         `}
     }
-    /* @media (max-width: 768px) {
-        
-    }  */
 `

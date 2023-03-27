@@ -12,7 +12,6 @@ export const MenuLinks = styled.ul`
     overflow: hidden;
 
     li {
-    /* width: 100%; */
     padding: 0 20px;
     text-align: left;
     margin: 0 20px;

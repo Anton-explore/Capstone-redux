@@ -7,7 +7,6 @@ import {
 } from './../SkillsList.styles'
 
 import React from 'react';
-// import { useDispatch } from "react-redux";
 import { addSkill } from '../../../features/skills/skillsSlice';
 
 import {
@@ -20,19 +19,10 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../../store/store';
 
 import Button from '../../Button';
+import { MyFormValues } from '../../../services/types';
+import { BUTTONS_TEXT } from '../../../services/props';
 
 
-export interface MyFormValues extends Record<string, {}> {
-  skillName: string,
-  skillRange: string | number,
-}
-
-
-// const skillsArr: MyFormValues[] = [];
-
-// const addSkills = (skills: MyFormValues) => {
-//   skillsArr.push(skills);
-// }
 
 const SkillsForm: React.FC<{}> = () => {
 
@@ -82,9 +72,6 @@ const SkillsForm: React.FC<{}> = () => {
             
             onSubmit={(values, actions) => {
             dispatch(addSkill({ id: nanoid(), ...values }));
-            //   addSkills(values);
-            //   console.log(skillsArr);
-              // alert(JSON.stringify(values, null, 4));
               actions.setSubmitting(false);
               actions.resetForm();
             }}
@@ -96,8 +83,6 @@ const SkillsForm: React.FC<{}> = () => {
                 dirty,
                 isSubmitting,
                 isValid,
-                handleChange,
-                handleBlur
             }) => (
                 <StyledForm className="form">
                     <LabelWrapper>
@@ -131,7 +116,7 @@ const SkillsForm: React.FC<{}> = () => {
 
                     <Button
                         disabled={!isValid || !dirty || isSubmitting}
-                        text={'Add skill'} 
+                        text={BUTTONS_TEXT.SKILL} 
                     />            
                 </StyledForm>
             )}

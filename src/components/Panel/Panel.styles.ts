@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const StyledPanel = styled.header<{ isExpanded: boolean }>`
-  /* position: fixed;
-  top: 0;
-  left: 0; */
   background: none;
   border: none;
   width: ${({ isExpanded }) => (isExpanded ? '20%' : '40px')};
@@ -19,7 +16,6 @@ export const MenuContainer = styled.div<{ isExpanded: boolean }>`
   justify-content: space-between;
   background-color: ${props => props.theme.colors.oxford};
   width: calc(100% - 40px);
-  /* width: ${({ isExpanded }) => (isExpanded ? '100%' : '0')}; */
   height: 100vh;
   text-align: center;
   position: sticky;
@@ -39,7 +35,6 @@ export const Toggle = styled.div`
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 0 5px 5px 0;
-  /* margin-top: 50px; */
   position: sticky;
   top: 50px;
   left: 0;

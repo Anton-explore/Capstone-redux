@@ -6,10 +6,7 @@ import {
   StyledSkillLevel
 } from './SkillsList.styles'
 
-import  { forwardRef, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../store/store';
-import { getSkill, SkillsState } from '../../features/skills/skillsSlice';
+import  { forwardRef, useState } from 'react';
 
 import SkillsForm from './SkillsForm';
 import Skill from './Skill/Skill';
@@ -18,30 +15,22 @@ import Heading from '../Box/Heading';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Ref, UniProps } from '../../services/types';
+import useSkillsHook from '../../features/hooks/useSkillsHook';
+import Loader from '../Loader';
+import { SKILL_LEVEL, TITLES } from '../../services/props';
 
-interface SkillsProps {
-  id: string
-}
 
-export type Ref = HTMLElement;
-
-const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef) => {
+const SkillsList = forwardRef<Ref, UniProps>(({id}: UniProps, forwardedRef) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const dispatch = useAppDispatch();
-  const skillsList: SkillsState[] = useSelector((state: RootState) => state.skills.skills);
-  const status = useSelector((state: RootState) => state.skills.isLoading);
-  const error = useSelector((state: RootState) => state.skills.error);
-
-  useEffect(() => {
-    dispatch(getSkill());
-  }, [dispatch])
+  const { skillsList, error, status} = useSkillsHook();
 
   return (
     <section ref={forwardedRef} id={id}>
       <StyledHeadWrapper>
-        <Heading title='Skills' />
+        <Heading title={TITLES.SK} />
         <Button
           text={isOpen ? 'Close edit' : 'Open edit'}
           onClick={() => setIsOpen(prev => !prev)}
@@ -51,9 +40,9 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
 
       {isOpen && (<SkillsForm />)}
       
-      {status && <p>Loading...</p>}
+      {status && <Loader status={status} />}
       {error !== null && (
-          <p>Oops, some error occured... {error}</p>
+          <Loader error={true} />
       )}
       {(skillsList.length > 0 && error === null && !status) && (
         <StyledResult>
@@ -69,10 +58,10 @@ const SkillsList = forwardRef<Ref, SkillsProps>(({id}: SkillsProps, forwardedRef
       </StyledScaleWrapper>
       
       <StyledSkillLevel>
-        <p>Beginner</p>
-        <p>Proficient</p>
-        <p>Expert</p>
-        <p>Master</p>
+        <p>{SKILL_LEVEL.BG}</p>
+        <p>{SKILL_LEVEL.PR}</p>
+        <p>{SKILL_LEVEL.EX}</p>
+        <p>{SKILL_LEVEL.MS}</p>
       </StyledSkillLevel>
     </section>
   )

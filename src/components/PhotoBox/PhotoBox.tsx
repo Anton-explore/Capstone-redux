@@ -1,14 +1,6 @@
+import { PhotoBoxProps } from "../../services/types";
 import { StyledImgDiv, StyledWrapper } from "./PhotoBox.styles";
 
-
-export interface PhotoBoxProps {
-    name?: string;
-    title?: string;
-    description?: string | JSX.Element;
-    avatar: string;
-    isInline?: boolean;
-    facade?: boolean;
-}
 
 const PhotoBox = ({ name, title, description, avatar, isInline, facade }: PhotoBoxProps) => {
     

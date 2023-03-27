@@ -1,8 +1,9 @@
 import './assets/styles/App.scss';
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Home from './pages/Home';
 import Inner from "./pages/Inner";
+import NotFound from './components/NotFound';
 
 
 const App = () => {
@@ -16,8 +17,8 @@ const App = () => {
         <Route path="/details/*" element={<Inner />}>
           <Route path=":section?" element={<Inner />} />
         </Route>
-
-        <Route path="*" element={<Home />} />
+        <Route path="/not-found" element={<NotFound/>} />
+        <Route path="*" element={<Navigate to="/not-found" replace={true} />} />
       </Routes>
     </div>
   );

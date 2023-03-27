@@ -34,21 +34,33 @@ const server = () => createServer({
           educations: [
             {
               id: 1,
-              "date": 2023,
+              "date": "2023",
               "title": "EPAM UpSkill",
-              "description": "Frontend Development. Elit voluptate ad nostrud laboris."
+              "description": "Frontend Development. Stack: HTML, CSS, SCSS, JavaScript, Git(Github,Gitlab), Typescript, React, Redux"
             },
             {
               id: 2,
-              "date": 2022,
-              "title": "Prometheus",
-              "description": "Basics of Web UI Development.  Javascript basic course. Et irure culpa ad proident labore excepteur elit dolore."
+              "date": "2023",
+              "title": "DevPRO",
+              "description": "Internship Javascript basic, Angular basic, Typescript basic"
             },
             {
               id: 3,
-              "date": 2009,
+              "date": "2022",
+              "title": "QAtestLab",
+              "description": "Software Functional Testing (Manual QA). Debugging - creating bug-reports, check-list, check-plan, test-cases.  Game-testing, mobile-testing. Understanding of the life-cycle of Software Testing. SCRUM-methodology."
+            },
+            {
+              id: 4,
+              "date": "2022",
+              "title": "Prometheus",
+              "description": "Basics of Web UI Development.  Javascript basic course. Stack: JavaScript, OOP, HTML, CSS, SCSS, Bootstrap, Git(GitHub), Slack/Jira, Photoshop, Figma"
+            },
+            {
+              id: 5,
+              "date": "2009",
               "title": "LNU Tarasa Shevchenka",
-              "description": "Sociology & PR, International tourism. Labore esse tempor nisi non mollit enim elit ullamco veniam elit duis nostrud. Enim pariatur ullamco dolor eu sunt ad velit aute eiusmod aliquip voluptate."
+              "description": "Sociology & PR - master degree, International tourism - practical course"
             }
           ],
         }

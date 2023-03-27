@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing Button snapshot renders button text correctly 1`] = `
+<button
+  className="sc-bcXHqe jsbDui"
+  disabled={false}
+  onClick={[MockFunction]}
+  type="submit"
+>
+  <div
+    className="sc-gswNZR gUeIuu"
+  >
+    Test Button
+  </div>
+</button>
+`;
+
+exports[`testing Button snapshot renders correctly, falsy values 1`] = `
+<button
+  className="sc-bcXHqe jsbDui"
+  disabled={false}
+  type="submit"
+/>
+`;

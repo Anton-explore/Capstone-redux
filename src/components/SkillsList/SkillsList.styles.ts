@@ -14,7 +14,7 @@ export const StyledForm = styled(Form)`
 `
 export const StyledErrorMessage = styled.div`
   color: red;
-  font-size: 14px; 
+  font-size: ${({ theme }) => theme.fontSizes.tiny}; 
   font-weight: 200;
 `
 
@@ -48,7 +48,7 @@ export const StyledField = styled(Field)`
 export const StyledResult = styled.ul`
   width: 100%;
   text-align: left;
-  border: 1px solid white;
+  border: 1px solid ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   margin: 0;
   padding: 0;

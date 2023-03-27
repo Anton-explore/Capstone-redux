@@ -3,20 +3,21 @@ import { NavLink } from "react-router-dom";
 import PhotoBox from "../../components/PhotoBox";
 import Button from "../../components/Button";
 
-import { nameProps } from "../../services/props";
+import { BUTTONS_TEXT, nameProps } from "../../services/props";
+import { StyledMainWrapper } from "./Home.styles";
 
 const Home = () => {
 
     return (
-        <main className="app-main">
+        <StyledMainWrapper data-testid="home-page">
             <PhotoBox
                 {...nameProps}
                 facade
             />
             <NavLink to="/details">
-                <Button text="Know more" />
+                <Button text={BUTTONS_TEXT.MORE} />
             </NavLink>
-        </main>
+        </StyledMainWrapper>
     )
 }
 

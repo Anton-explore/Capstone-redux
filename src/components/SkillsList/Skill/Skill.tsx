@@ -1,16 +1,15 @@
 import { MdClose } from "react-icons/md";
 
-import { deleteSkill, SkillsState } from "../../../features/skills/skillsSlice";
+import { deleteSkill } from "../../../features/skills/skillsSlice";
 import { StyledDelButton, StyledSkillLane, StyledWrapper } from "./Skill.styles";
 
 import { useAppDispatch } from "../../../store/store";
+import { SkillsState } from "../../../services/types";
 
 
 
 const Skill = ({ skill }: { skill: SkillsState }) => {
-
   const dispatch = useAppDispatch();
-
   const handleDelete = () => dispatch(deleteSkill(skill.id));
 
   return (

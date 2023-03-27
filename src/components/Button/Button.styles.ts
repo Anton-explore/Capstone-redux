@@ -1,6 +1,14 @@
 import styled, { css } from "styled-components"
 
-export const StyledButton = styled.button<{up: boolean}>`
+type StyledButtonProps = {
+  up?: boolean
+}
+
+type StyledHeadingProps = {
+  shrunk?: boolean
+}
+
+export const StyledButton = styled.button<StyledButtonProps>`
   max-width: 140px;
   border-radius: 5px;
   padding: 10px 20px;
@@ -9,8 +17,8 @@ export const StyledButton = styled.button<{up: boolean}>`
   justify-content: center;
   gap: 10px;
 
-  background-color: ${props => props.theme.colors.oxford};
-  color: ${props => props.theme.colors.white};
+  background-color: ${({theme}) => theme.colors.oxford};
+  color: ${({theme}) => theme.colors.white};
   ${({ up }) =>
     up &&
     css`
@@ -19,19 +27,18 @@ export const StyledButton = styled.button<{up: boolean}>`
       right: 50px;
       z-index: 5;
     `}
-  
-
+    
   &:active,
   &:focus,
   &:hover {
-    background-color: ${props => props.theme.colors.accent};
-    color: ${props => props.theme.colors.white};
+    background-color: ${({theme}) => theme.colors.accent};
+    color: ${({theme}) => theme.colors.white};
     cursor: pointer;
   }
 
   &:disabled {
     cursor: pointer;
-    background-color: ${props => props.theme.colors.alto};
+    background-color: ${({theme}) => theme.colors.alto};
     box-shadow: none;
 
     &:hover,
@@ -41,7 +48,7 @@ export const StyledButton = styled.button<{up: boolean}>`
   }
 `
 
-export const StyledDiv = styled.div<{ shrunk: boolean }>`
+export const StyledHeading = styled.div<StyledHeadingProps>`
     @media (max-width: 1070px) {
       display: ${({ shrunk }) => (shrunk ? 'none' : 'block')};
     }

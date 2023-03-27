@@ -2,18 +2,15 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import Isotope from 'isotope-layout';
 
 import PortfolioInfo from "./PortfolioInfo";
-import { filtersDefault, portfolioItemsDefault } from "../../services/filters";
+import { filtersDefault, portfolioItemsDefault, TITLES } from "../../services/props";
 import Heading from "../Box/Heading";
 
 import { StyledPortfolio } from "./Portfolio.styles";
+import { Ref, UniProps } from "../../services/types";
 
-interface PortfolioProps {
-    id: string
-}
 
-export type Ref = HTMLElement;
 
-const Portfolio = forwardRef<Ref, PortfolioProps>(({id}: PortfolioProps, forwardedRef) => {
+const Portfolio = forwardRef<Ref, UniProps>(({id}: UniProps, forwardedRef) => {
 
     const isotope = useRef<Isotope | null>();
     const [filterKey, setFilterKey] = useState("All");
@@ -50,7 +47,7 @@ const Portfolio = forwardRef<Ref, PortfolioProps>(({id}: PortfolioProps, forward
     return (
         <section ref={forwardedRef} id={id}>
             <StyledPortfolio id="portfolio">
-                <Heading title='Portfolio' />
+                <Heading title={TITLES.PF} />
                 <ul className="portfolio-filters">
                     {filters.map((filter, index) => (
                         <li key={ index+1 } className={ filter.active ? 'active' : '' } onClick={onFilter(filter.label)}>{filter.label} <span>/</span></li>

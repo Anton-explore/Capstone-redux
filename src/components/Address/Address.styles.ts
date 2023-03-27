@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledAdress = styled.div`
+export const StyledAddress = styled.div`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;

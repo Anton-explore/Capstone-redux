@@ -1,9 +1,6 @@
+import { PortfolioInfoProps } from "../../../services/types";
 
-type PortfolioInfoProps = {
-    title: string,
-    text: string,
-    url: string
-}
+
 
 const PortfolioInfo = ({ title, text, url }: PortfolioInfoProps) => {
 

@@ -1,54 +1,33 @@
-import { forwardRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
-import { getEducation } from '../../features/education/educationSlice';
-import { RootState, useAppDispatch } from '../../store/store';
+import { forwardRef } from 'react';
+
+import useTimeLineHook from '../../features/hooks/useTimelineHook';
+import { TITLES } from '../../services/props';
+import { Ref, TimelineProps, UniProps } from '../../services/types';
+
 import Heading from '../Box/Heading';
+import Loader from '../Loader';
 import { StyledInfo, StyledTitle, StyledText, StyledItem, StyledInfoBlock, StyledDateBlock } from './TimeLine.styles';
 
 
-export interface TimelineProps {
-    id: number,
-    date: number,
-    title: string,
-    description: string
-}
-
-export interface TimelineDataProps {
-    educations: TimelineProps[];
-}
-
-interface IdProps {
-    id: string;
-}
-
-export type Ref = HTMLElement;
-
-const TimeLine = forwardRef<Ref, IdProps>(({ id }: IdProps, forwardedRef ) => {
 
 
-    // getEducation();
-    const dispatch = useAppDispatch();
-    const educationsList = useSelector((store: RootState) => store.education.educations);
-    const status = useSelector((store: RootState) => store.education.isLoading);
-    const error = useSelector((store: RootState) => store.education.error);
+const TimeLine = forwardRef<Ref, UniProps>(({ id }: UniProps, forwardedRef ) => {
 
-    useEffect(() => {
-        dispatch(getEducation());
-    }, [dispatch])
+
+    const { educationsList, error, status} = useTimeLineHook();
 
     return (
         <section ref={forwardedRef} id={id}>
-            <Heading title='Education' />
+            <Heading title={TITLES.EDU} />
             
-            {status && <p>Loading...</p>}
+            {status && <Loader status={status} />}
             {error !== null && (
-                <p>Oops, some error occured... {error}</p>
+                <Loader error={true} />
             )}
-            {educationsList.length > 0 && (
+            {(!!educationsList.length && error === null && !status ) && (
                 <StyledInfo className="timeline-list">
-                    {educationsList.map((item: TimelineProps) =>
-                        <StyledItem key={item.id}>
+                    {educationsList.map((item: TimelineProps, index: number) =>
+                        <StyledItem key={index+1}>
                             <StyledDateBlock className="timeline-date">{item.date}</StyledDateBlock>
                             <StyledInfoBlock>
                                 <StyledTitle>{item.title}</StyledTitle>

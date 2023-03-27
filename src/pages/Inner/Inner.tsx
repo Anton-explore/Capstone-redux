@@ -2,7 +2,7 @@
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/Button";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Panel from "../../components/Panel";
 import Box from "../../components/Box";
@@ -13,14 +13,14 @@ import Expertise from "../../components/Expertise";
 import Portfolio from "../../components/Portfolio";
 import SkillsList from "../../components/SkillsList";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { expertiseProps, feedbackProps, nameProps } from "../../services/props";
+import { expertiseProps, feedbackProps, nameProps, TITLES } from "../../services/props";
 
 
 const Inner = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const onClickBackHandler = () => {
-        // navigate('/details/', { replace: true });
+        navigate('/details/', { replace: true });
         window.scrollTo({
             top: 0,
             behavior: "smooth"
@@ -68,7 +68,7 @@ const Inner = () => {
     }, [params, scrollToSection]);
 
     return (
-        <div className="app-wrapper">
+        <div className="app-wrapper" data-testid="inner-page">
             <Panel />
             
 
@@ -76,7 +76,7 @@ const Inner = () => {
                 <Box
                     ref={sectionAboutRef}
                     id='about'
-                    title='About me'
+                    title={TITLES.ABOUT}
                     content={nameProps.description as string}
                 />
                 <TimeLine ref={sectionEducationRef} id='educations' />

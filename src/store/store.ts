@@ -25,16 +25,8 @@ const educationPersistConfig = {
   storage,
 };
 
-// const persistConfig = {
-//     key: 'skills',
-//     storage
-// };
-
-// const persistedReducer = persistReducer(persistConfig, skillsReducer);
-
 export const store = configureStore({
   reducer: {
-    // skills: persistedReducer
     skills: persistReducer(skillsPersistConfig, skillsReducer),
     education: persistReducer(educationPersistConfig, educationReducer),
   },

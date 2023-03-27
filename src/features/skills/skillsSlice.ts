@@ -1,22 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { SkillsState, SkillStateType } from "../../services/types";
 
-import { MyFormValues } from "../../components/SkillsList/SkillsForm";
 
-export interface SkillsState extends MyFormValues {
-    id: string,
-    skillName: string,
-    skillRange: string | number,
-};
+
 
 type DataType = {
   skills: SkillsState[];
 }
-interface StateType {
-    skills: SkillsState[];
-    isLoading: boolean,
-    error: string | null,
-}
+
 
 
 axios.defaults.baseURL = 'api';
@@ -27,11 +19,8 @@ export const getSkill = createAsyncThunk<
     >(
     'skills/getSkill',
     async (_, thunkAPI) => {
-    //   const state = thunkAPI.getState();
       try {
         const { data } = await axios.get('/skills');
-          // console.log(`This is my data`);
-          // console.log(data);
         return data as DataType;
       } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
@@ -66,7 +55,7 @@ export const deleteSkill = createAsyncThunk<
     try {
       const { status, statusText } = await axios.delete(`/skills/${skillId}`);
       if (status !== 204) {
-        return new Error(`${status} : ${statusText}`);
+        throw new Error(`${status} : ${statusText}`);
       }
       return skillId;
     } catch (error:any) {
@@ -77,7 +66,7 @@ export const deleteSkill = createAsyncThunk<
 
 
 
-const initialState: StateType = {
+const initialState: SkillStateType = {
     skills: [],
     isLoading: false,
     error: null,
@@ -96,8 +85,7 @@ const skillSlice = createSlice({
         state.error = null;
       })
       .addCase(getSkill.fulfilled, (state, action: any) => {
-        state.skills = action.payload.skills;
-        console.log(state.skills);
+        state.skills = action.payload.skills.length ? action.payload.skills : state.skills;
         state.isLoading = false;
         state.error = null;
       })
@@ -126,7 +114,6 @@ const skillSlice = createSlice({
       })
       .addCase(deleteSkill.fulfilled, (state, { payload }: any) => {
         state.skills = state.skills.filter(skill => skill.id !== payload);
-        console.log(state.skills);
         state.isLoading = false;
         state.error = null;
       })
@@ -137,7 +124,6 @@ const skillSlice = createSlice({
   },
 });
 
-// export const { addSkill, deleteSkill } = skillSlice.actions;
 export const skillsReducer = skillSlice.reducer;
 
 

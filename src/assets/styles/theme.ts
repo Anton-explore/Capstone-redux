@@ -1,3 +1,4 @@
+import BackImage from '../../assets/images/background.png';
 
 export const theme = Object.freeze({
   colors: {
@@ -9,11 +10,12 @@ export const theme = Object.freeze({
     white: '#FFFFFF',
     black: '#000000',
     alto: '#DDDDDD',
-    mainBackground: ['linear-gradient(to bottom, #c9d6ff,  #e2e2e2)'],
+    mainBackground: [`linear-gradient(to top, rgba(65, 65, 65, .5), rgba(65, 65, 65, .5)), url(${BackImage}) no-repeat center/cover`],
     tagBackground: ['linear-gradient(to bottom, #FFD194, #D1913C)'],
   },
   fontSizes: {
-    small: '14px',
+    tiny: '14px',
+    small: '16px',
     medium: '18px',
     large: '24px',
     huge: '30px'
