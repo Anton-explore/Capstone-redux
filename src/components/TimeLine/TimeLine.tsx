@@ -10,6 +10,9 @@ import { StyledInfo, StyledTitle, StyledText, StyledItem, StyledInfoBlock, Style
 
 
 
+export interface TimelineDataProps {
+    educations: TimelineProps[];
+}
 
 const TimeLine = forwardRef<Ref, UniProps>(({ id }: UniProps, forwardedRef ) => {
 
