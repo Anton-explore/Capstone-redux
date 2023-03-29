@@ -8,7 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './assets/styles/theme';
 import configureStore from 'redux-mock-store';
 import { RootState } from './store/store';
-
+import axios from 'axios';
 
 const mockStore = configureStore([]);
 
@@ -33,7 +33,7 @@ describe('App', () => {
   const response = {};
 
   test('renders nav links', () => {
-    // axios.get.mockReturnValue(response)
+    (axios.get as jest.Mock).mockResolvedValue(response);
 
     render(
       <Provider store={store}>
