@@ -23,6 +23,9 @@ describe('App', () => {
       skills: {
         skills: [],
       },
+      education: {
+        educations: []
+      }
     };
     store = mockStore(initialState);
   });
@@ -33,13 +36,13 @@ describe('App', () => {
     // axios.get.mockReturnValue(response)
 
     render(
-      // <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <MemoryRouter initialEntries={['/details']}>
-            <App />
-        </MemoryRouter>
-      </ThemeProvider>
-      // </Provider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <MemoryRouter initialEntries={['/details']}>
+              <App />
+          </MemoryRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const aboutLink = screen.getByRole('link', { name: 'About me' });
